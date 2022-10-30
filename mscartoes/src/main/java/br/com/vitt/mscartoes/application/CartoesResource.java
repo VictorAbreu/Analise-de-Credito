@@ -28,7 +28,7 @@ public class CartoesResource {
 
 	@GetMapping
 	public String status() {
-		return "ok";
+		return "oks";
 	}
 	
 	@SuppressWarnings("rawtypes")
@@ -46,13 +46,12 @@ public class CartoesResource {
 	}
 	
 	@GetMapping(params = "cpf")
-	public ResponseEntity<List<CartoesPorClienteResponse>> getCartoesByCliente(@RequestParam("cpf") String cpf){
-		
-		List<ClienteCartao> lista = clienteCartaoService.listCartoesByCpf(cpf);
-		List<CartoesPorClienteResponse> resultList = lista.stream()
-				.map(CartoesPorClienteResponse::fromModel)
-				.collect(Collectors.toList());
-		
-		return ResponseEntity.ok(resultList);
+    public ResponseEntity<List<CartoesPorClienteResponse>> getCartoesByCliente(
+            @RequestParam("cpf") String cpf){
+        List<ClienteCartao> lista = clienteCartaoService.listCartoesByCpf(cpf);
+        List<CartoesPorClienteResponse> resultList = lista.stream()
+                .map(CartoesPorClienteResponse::fromModel)
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(resultList);
 	}
 }
